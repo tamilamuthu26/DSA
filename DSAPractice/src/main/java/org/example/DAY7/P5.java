@@ -17,15 +17,53 @@ public class P5 {
         String s2 = "aabbb22rrrrr345571111111";
         String s3 = "aaaabbeedddd";
         System.out.println("\n----------------"+"For Given String: "+s1+"----------------");
-        callLongestSubstring(s1);
+        System.out.println(callLongestSubstring(s1));
         System.out.println("\n----------------"+"For Given String: "+s2+"----------------");
-        callLongestSubstring(s2);
+        System.out.println(callLongestSubstring(s2));
         System.out.println("\n----------------"+"For Given String: "+s3+"----------------");
-        callLongestSubstring(s3);
+        System.out.println(callLongestSubstring(s3));
     }
     public static String callLongestSubstring(String s){
 
 
-        return " ";
+        if (s == null) {
+            throw new IllegalArgumentException("Input string cannot be null");
+        }
+
+        if (s.isEmpty()) {
+            return "[0,0]";
+        }
+
+        int maxStart = 0;
+        int maxLength = 1;
+
+        int currentStart = 0;
+        int currentLength = 1;
+
+        for (int i = 1; i < s.length(); i++) {
+
+            if (s.charAt(i) == s.charAt(i - 1)) {
+                currentLength++;
+            } else {
+
+                // Compare with max before resetting
+                if (currentLength > maxLength) {
+                    maxLength = currentLength;
+                    maxStart = currentStart;
+                }
+
+                // Reset for new streak
+                currentStart = i;
+                currentLength = 1;
+            }
+        }
+
+        // Final comparison (important for last streak)
+        if (currentLength > maxLength) {
+            maxLength = currentLength;
+            maxStart = currentStart;
+        }
+
+        return "[" + maxStart + "," + maxLength + "]";
     }
 }
