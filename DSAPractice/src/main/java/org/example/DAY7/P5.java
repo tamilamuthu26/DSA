@@ -23,7 +23,7 @@ public class P5 {
         System.out.println("\n----------------"+"For Given String: "+s3+"----------------");
         System.out.println(callLongestSubstring(s3));
     }
-    public static String callLongestSubstring(String s){
+    public static String callLongestSubstring(String s) {
 
 
         if (s == null) {
@@ -34,36 +34,31 @@ public class P5 {
             return "[0,0]";
         }
 
-        int maxStart = 0;
-        int maxLength = 1;
+        int maxStart =0,maxLength=0;
 
-        int currentStart = 0;
-        int currentLength = 1;
+        int currentStart = 0, currentLength=0;
 
-        for (int i = 1; i < s.length(); i++) {
 
+        for(int  i =1;i<s.length();i++ ) {
             if (s.charAt(i) == s.charAt(i - 1)) {
                 currentLength++;
-            } else {
-
-                // Compare with max before resetting
+            }else {
                 if (currentLength > maxLength) {
                     maxLength = currentLength;
                     maxStart = currentStart;
                 }
-
-                // Reset for new streak
                 currentStart = i;
                 currentLength = 1;
             }
         }
 
-        // Final comparison (important for last streak)
-        if (currentLength > maxLength) {
-            maxLength = currentLength;
-            maxStart = currentStart;
+        if(currentLength > maxLength){
+            maxLength= currentLength;
+            maxStart= currentStart;
         }
 
-        return "[" + maxStart + "," + maxLength + "]";
+        return "["+maxStart+","+maxLength+"]";
+
+
     }
 }
