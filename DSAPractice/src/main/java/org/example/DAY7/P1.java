@@ -38,16 +38,13 @@ public class P1
         if(a==null || a.length==0){
             return n;
         }
-
         Arrays.sort(a, Comparator.comparing(b->b[0]));
-
         int s= 0;
         int startTime= a[0][0];
         int endTime=a[0][1];
         for(int i =1 ;i<a.length;i++) {
             int start = a[i][0];
             int end = a[i][1];
-
             if (start <= endTime) {
                 endTime = Math.max(end, endTime);
             } else {
@@ -55,7 +52,6 @@ public class P1
                 startTime = start;
                 endTime = end;
             }
-
         }
         s+= endTime - startTime + 1;
         return n - s;

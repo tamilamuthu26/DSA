@@ -1,5 +1,6 @@
 package org.example.DAY7;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,14 +54,14 @@ public class P4 {
 
         System.out.println(process(input));
 
-//        List<Map.Entry<String,Integer>> m= List.of(
-//                Map.entry("Sarah",91),
-//                Map.entry("Goldie",92),
-//                Map.entry("Elaine",93),
-//                Map.entry("Elaine",95),
-//                Map.entry("Goldie",93),
-//                Map.entry("Sarah",93)
-//        );
+        List<Map.Entry<String, Integer>> m = List.of(
+                Map.entry("Sarah", 91),
+                Map.entry("Goldie", 92),
+                Map.entry("Elaine", 93),
+                Map.entry("Elaine", 95),
+                Map.entry("Goldie", 93),
+                Map.entry("Sarah", 93)
+        );
 //
 //        int i = m.stream()
 //                .collect(Collectors.groupingBy(m1->m1.getKey(),
@@ -70,40 +71,37 @@ public class P4 {
 //                .mapToInt(Double::intValue)
 //                .max()
 //                .getAsInt();
-//
-//        System.out.println(i);
+
+        double i = Arrays.stream(input)
+                .collect(Collectors.groupingBy(a -> a[0],
+                        Collectors.averagingInt(a -> Integer.parseInt(a[1]))))
+
+                .values()
+                .stream().mapToDouble(Double::doubleValue).max().getAsDouble();
+
+                System.out.println(i);
 
     }
 
-    public static int process(String arr[][]){
-        if(arr==null ||arr.length==0){
+    public static int process(String arr[][]) {
+        if (arr == null || arr.length == 0) {
             throw new IllegalArgumentException("Array is empty");
         }
-
-        Map<String,Integer> sumMap= new HashMap<>();
-        Map<String, Integer> countMap= new HashMap<>();
-
-        for(String[] a: arr){
-            String name= a[0];
-            int score= Integer.parseInt(a[1]);
-
-            sumMap.put(name,sumMap.getOrDefault(name,0)+score);
-            countMap.put(name,countMap.getOrDefault(name,0)+1);
+        Map<String, Integer> sumMap = new HashMap<>();
+        Map<String, Integer> countMap = new HashMap<>();
+        for (String[] a : arr) {
+            String name = a[0];
+            int score = Integer.parseInt(a[1]);
+            sumMap.put(name, sumMap.getOrDefault(name, 0) + score);
+            countMap.put(name, countMap.getOrDefault(name, 0) + 1);
         }
-
         int maxAverage = Integer.MIN_VALUE;
-
-        for(String s: sumMap.keySet()){
+        for (String s : sumMap.keySet()) {
             int sum = sumMap.get(s);
-            int count= countMap.get(s);
-
-            int average= sum/count;
-
-            maxAverage= Math.max(average,maxAverage);
+            int count = countMap.get(s);
+            int average = sum / count;
+            maxAverage = Math.max(average, maxAverage);
         }
-
-
-
         return maxAverage;
     }
 }

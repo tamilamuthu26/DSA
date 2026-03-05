@@ -34,37 +34,25 @@ public class P2 {
     }
 
     public static int process(int[] arr, int k){
-
         if( arr == null || arr.length==0){
             throw new IllegalArgumentException("Input array is empty");
         }
-
-
         PriorityQueue<Integer> pq= new PriorityQueue<>();
-
-
-
-
         for(int m: arr){
             pq.offer(m);
         }
         int op= 0;
-
         while (!pq.isEmpty() && pq.peek()<k){
-
             if (pq.size() < 2) {
                 return -1; //impossible
             }
-
             int x= pq.poll();
-            int y=pq.poll();
-            int newVal= (x * 2)+ y;
-            pq.offer(newVal);
-            op++;
+            int y=pq.poll();             //Input: nums = [1,1,2,4,9], k = 20
+            int newVal= (x * 2)+ y;      //Output: 4
+            pq.offer(newVal);            //Input: nums = [2,11,10,1,3], k = 10
+            op++;                        //Output: 2
         }
-
         return  op;
-
-
     }
+
 }

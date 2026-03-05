@@ -13,7 +13,7 @@ package org.example.DAY7;
 
 public class P3 {
     public static void main(String[] args) {
-        int[] arr= {3,4,1};
+        int[] arr= {3,2,1};
         System.out.println(process(arr));
     }
     public static int process(int arr[]){
@@ -27,4 +27,6 @@ public class P3 {
         }
         return op;
     }
+
+
 }

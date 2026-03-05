@@ -35,13 +35,10 @@ public class P5 {
             if (ch == '(' || ch == '{' || ch == '[') {
                 stack.push(ch);
             } else {
-
                 if (stack.isEmpty()) {
                     return false;
                 }
-
                 char top = stack.pop();
-
                 if ((ch == ')' && top != '(') ||
                         (ch == '}' && top != '{') ||
                         (ch == ']' && top != '[')) {
@@ -49,7 +46,6 @@ public class P5 {
                 }
             }
         }
-
         return stack.isEmpty();
     }
 

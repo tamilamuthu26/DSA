@@ -9,8 +9,6 @@ package org.example.DAY4;
 //Input: nums = [1,0,0,1,0,1], k = 2
 //Output: false
 //Explanation: The second 1 and third 1 are only one apart from each other.
-
-
 public class P3 {
     public static void main(String[] args) {
         int arr[]= {1,0,0,0,1,0,0,1};
@@ -20,18 +18,15 @@ public class P3 {
     public static boolean process(int arr[],int k){
 
         int n = arr.length;
-
         int lastIndex=-1;
         for(int i =0;i<n;i++){
-
             if(arr[i]==1) {
-
                 if (lastIndex != -1) {
                     if (i - lastIndex - 1 < k) {
                         return false;
                     }
-                }
-                lastIndex = i;
+                }                           //Input: nums = [1,0,0,1,0,1], k = 2
+                lastIndex = i;              //Output: false
             }
         }
         return true;

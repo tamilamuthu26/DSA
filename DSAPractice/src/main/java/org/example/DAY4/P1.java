@@ -7,7 +7,6 @@ import java.util.Queue;
 
 //find out the first non repeating character and replace further characters with it till
 //its occurrence is found. If any duplicate found replace it with '#'
-//
 //Ex : input := "aabcbd"
 //output := "a#bbcc"
 public class P1 {
@@ -16,31 +15,26 @@ public class P1 {
         System.out.println(process(a));
     }
     public static String process(String a){
-
         Map<Character, Integer> map= new HashMap<>();
-        Queue<Character> queue= new LinkedList<>();
+        Queue<Character> q= new LinkedList<>();
 
         StringBuilder sb= new StringBuilder();
 
-        for(char ch: a.toCharArray()){
-            map.put(ch,map.getOrDefault(ch,0)+1);
+        for(char ch : a.toCharArray()){
+            map.put(ch, map.getOrDefault(ch,0)+1);
+            q.offer(ch);
 
-            queue.offer(ch);
-
-
-            //removing repeating characters from queue on every iteration
-            while(!queue.isEmpty() && map.get(queue.peek())>1){
-                queue.poll();
+            while(!q.isEmpty() && map.get(q.peek())>1){
+                q.poll();
             }
 
-            if(queue.isEmpty()){
+            if(q.isEmpty()){
                 sb.append("#");
             }
             else{
-                sb.append(queue.peek());
+                sb.append(q.peek());
             }
         }
-
-        return sb.toString();
+        return  sb.toString();
     }
 }

@@ -13,35 +13,34 @@ package org.example.DAY4;
 //Input: a = "a", b = "aa"
 //Output: 2
 public class P2 {
-    public static void main(String args[]){
-
-        String a= "abcd";
-        String b= "cdabcdab";
-
-
-        System.out.println(process(a,b));
+    public static void main(String args[]) {
+//        String a = "abcd";
+//        String b = "cdabcdab";
+//        String a= "abcd";
+//        String b="dabcd";
+        String a = "abc";
+        String b = "cabca";
+        System.out.println(process(a, b));
     }
 
-    public static int process(String a, String b){
+    public static int process(String a, String b) {
+        int count = 0;
 
-        int count =0;
-
-        StringBuilder sb1 = new StringBuilder();
-
-        while(sb1.length()<b.length()){
-            sb1.append(a);
+        StringBuilder sb = new StringBuilder();
+        while (sb.length() < b.length()) {
+            sb.append(a);
             count++;
         }
-
-        if(sb1.toString().contains(b)){
+        if (sb.toString().contains(b)) {
             return count;
         }
 
-        sb1.append(a);
+        sb.append(a);
         count++;
-        if(sb1.toString().contains(b)){
+        if (sb.toString().contains(b)) {
             return count;
         }
         return -1;
+
     }
 }

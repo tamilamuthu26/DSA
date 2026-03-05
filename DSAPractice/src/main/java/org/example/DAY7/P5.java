@@ -24,21 +24,14 @@ public class P5 {
         System.out.println(callLongestSubstring(s3));
     }
     public static String callLongestSubstring(String s) {
-
-
         if (s == null) {
             throw new IllegalArgumentException("Input string cannot be null");
         }
-
         if (s.isEmpty()) {
             return "[0,0]";
         }
-
         int maxStart =0,maxLength=0;
-
         int currentStart = 0, currentLength=0;
-
-
         for(int  i =1;i<s.length();i++ ) {
             if (s.charAt(i) == s.charAt(i - 1)) {
                 currentLength++;
@@ -51,12 +44,10 @@ public class P5 {
                 currentLength = 1;
             }
         }
-
         if(currentLength > maxLength){
             maxLength= currentLength;
             maxStart= currentStart;
         }
-
         return "["+maxStart+","+maxLength+"]";
 
 

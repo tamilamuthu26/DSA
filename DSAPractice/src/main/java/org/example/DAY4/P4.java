@@ -21,31 +21,33 @@ package org.example.DAY4;
 import java.util.Scanner;
 
 public class P4 {
-    public static int shipWithinDays(int[]w,int d){
-        int max=0,sum=0;
-        for(int x:w){max=Math.max(max,x);sum+=x;}
-        int l=max,r=sum;
-        while(l<r){
-            int m=l+(r-l)/2;
-            if(can(w,d,m))r=m;
-            else l=m+1;
-        }
-        return l;
-    }
-    private static boolean can(int[]w,int d,int cap){
-        int days=1,cur=0;
-        for(int x:w){
-            if(cur+x>cap){days++;cur=0;}
-            cur+=x;
-        }
-        return days<=d;
-    }
     public static void main(String[]a){
-        Scanner sc=new Scanner(System.in);
-        int n=sc.nextInt();
-        int[]w=new int[n];
-        for(int i=0;i<n;i++)w[i]=sc.nextInt();
-        int d=sc.nextInt();
+        int[] w = {3,2,2,4,1,4};
+        int d = 3;
         System.out.println(shipWithinDays(w,d));
+    }
+
+    public static int shipWithinDays(int[] arr, int d){
+        int max= 0, sum =0;
+        for(int i =0;i<arr.length;i++){
+            max=Math.max(arr[i],max);
+            sum+=arr[i];
+        }
+        int l= max,r=sum;
+        while(l<r){
+            int m  = l+(r-l)/2;
+            if(can(arr, m,d)) r=m;
+            else l = m + 1;
+        }return l;
+    }
+    public static boolean can(int[]arr, int m , int d){
+        int days=1; int curr=0;
+        for(int a: arr){
+            if(a+curr > m){
+                days++;
+                curr=0;
+            }
+            curr+=a;
+        }return days<=d;
     }
 }
