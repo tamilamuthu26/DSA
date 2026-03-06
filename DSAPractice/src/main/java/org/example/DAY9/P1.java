@@ -25,77 +25,57 @@ import java.util.TreeMap;
 //expectedOutput = { new Interval( 1, 2, 20 ), new Interval( 3, 6, 15 ), new Interval( 7, 10, 8 ) };
 public class P1
 {
-
     static class Event {
         int time;
         int price;
         boolean start;
-
         Event(int time, int price, boolean start) {
             this.time = time;
             this.price = price;
             this.start = start;
         }
     }
-
     public static void main(String[] args) {
-
         List<Interval> input = List.of(
                 new Interval(1, 5, 20),
                 new Interval(3, 8, 15),
                 new Interval(7, 10, 8)
         );
-
         List<Interval> result = getLowestPriceIntervals(input);
-
         for (Interval i : result)
             System.out.println(i);
     }
 
     public static  List<Interval> getLowestPriceIntervals(List<Interval> input){
         List<Event> events = new ArrayList<>();
-
         for (Interval i : input) {
             events.add(new Event(i.start, i.price, true));
             events.add(new Event(i.end + 1, i.price, false));
         }
-
         events.sort(Comparator.comparingInt(e -> e.time));
-
         TreeMap<Integer, Integer> activePrices = new TreeMap<>();
-
         List<Interval> result = new ArrayList<>();
-
         int prevTime = -1;
         int prevPrice = -1;
-
         for (Event e : events) {
-
             if (prevPrice != -1 && prevTime < e.time) {
                 if (prevPrice != -1 && prevTime < e.time) {
-
                     Interval newInterval = new Interval(prevTime, e.time - 1, prevPrice);
-
                     if (!result.isEmpty()) {
                         Interval last = result.get(result.size() - 1);
-
                         if (last.price == newInterval.price && last.end + 1 == newInterval.start) {
                             last.end = newInterval.end;
                         } else {
                             result.add(newInterval);
                         }
-
                     } else {
                         result.add(newInterval);
                     }
                 }
-            }
-
-            if (e.start) {
+            }if (e.start) {
                 activePrices.put(e.price,
                         activePrices.getOrDefault(e.price, 0) + 1);
             } else {
-
                 int count = activePrices.get(e.price);
 
                 if (count == 1)
@@ -103,22 +83,14 @@ public class P1
                 else
                     activePrices.put(e.price, count - 1);
             }
-
             prevTime = e.time;
-
             if (!activePrices.isEmpty())
                 prevPrice = activePrices.firstKey();
             else
                 prevPrice = -1;
         }
-
         return result;
-
-
     }
-
-
-
 }
 
 class Interval {
